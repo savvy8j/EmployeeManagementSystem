@@ -13,3 +13,9 @@ This application provides a REST API for managing employees, including operation
 - Interact via Postman or cURL
 
 
+## Technologies Used
+- Java
+- Dropwizard
+- Hibernate
+- PostgreSQL
+- Postman
