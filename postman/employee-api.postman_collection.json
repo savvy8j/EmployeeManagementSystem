@@ -1,0 +1,80 @@
+{
+	"info": {
+		"_postman_id": "43fa1305-c00d-4a06-991d-b0f870b837ae",
+		"name": "EmployeeManagementSystemDropwizard",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32075082",
+		"_collection_link": "https://platform-api-team-4040.postman.co/workspace/Postman-API-Fundamentals-Studen~bee917b6-b948-4c89-9333-c1807405f0f9/collection/32075082-43fa1305-c00d-4a06-991d-b0f870b837ae?action=share&source=collection_link&creator=32075082"
+	},
+	"item": [
+		{
+			"name": "Test",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"ABC\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/test/John",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test",
+						"John"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateEmployee",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateEmployee",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GetEmployeeById",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllEmployees",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteEmployeeById",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
