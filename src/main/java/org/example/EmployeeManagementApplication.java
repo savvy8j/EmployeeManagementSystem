@@ -1,16 +1,23 @@
 package org.example;
 
+import io.dropwizard.auth.AuthDynamicFeature;
+import io.dropwizard.auth.AuthValueFactoryProvider;
+import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.core.Application;
 import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
+import org.example.auth.BasicAuthenticator;
+import org.example.auth.RoleAuthorizer;
+import org.example.auth.User;
 import org.example.core.EmployeeService;
 import org.example.core.TestService;
 import org.example.db.Employee;
 import org.example.db.EmployeeDAO;
 import org.example.resources.EmployeeResource;
 import org.example.resources.TestResource;
+import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 public class EmployeeManagementApplication extends Application<EmployeeManagementConfiguration> {
 
@@ -26,6 +33,7 @@ public class EmployeeManagementApplication extends Application<EmployeeManagemen
             return configuration.getDatabase();
         }
     };
+
     @Override
     public String getName() {
         return "true";
@@ -44,11 +52,21 @@ public class EmployeeManagementApplication extends Application<EmployeeManagemen
 
         environment.jersey().register(new EmployeeResource(new EmployeeService(new EmployeeDAO(hibernate.getSessionFactory()))));
 
-
-
-
-        System.out.println(configuration.getGreetingMessage());
-        // TODO: implement application
+        environment.jersey().register(new AuthDynamicFeature(
+                new BasicCredentialAuthFilter.Builder<User>()
+                        .setAuthenticator(new BasicAuthenticator())
+                        .setAuthorizer(new RoleAuthorizer())
+                        .setRealm("SUPER SECRET STUFF")
+                        .buildAuthFilter()));
+        environment.jersey().register(RolesAllowedDynamicFeature.class);
+        //If you want to use @Auth to inject a custom Principal type into your resource
+        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
     }
 
+//
+//        System.out.println(configuration.getGreetingMessage());
+    // TODO: implement application
 }
+
+
+

@@ -1,9 +1,12 @@
 package org.example.resources;
 
+import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import lombok.extern.slf4j.Slf4j;
+import org.example.auth.User;
 import org.example.core.EmployeeService;
 import org.example.db.Employee;
 
@@ -18,10 +21,12 @@ public class EmployeeResource {
     public EmployeeResource(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
+
+    @RolesAllowed("USER")
     @UnitOfWork
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Employee> getAllEmployees() {
+    public List<Employee> getAllEmployees(@Auth User user) {
         return employeeService.findAll();
     }
 
@@ -33,6 +38,7 @@ public class EmployeeResource {
         return employeeService.findById(id);
     }
 
+    @RolesAllowed("ADMIN")
     @UnitOfWork
     @POST
     @Produces(MediaType.APPLICATION_JSON)
