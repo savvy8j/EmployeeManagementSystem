@@ -22,7 +22,7 @@ public class EmployeeResource {
         this.employeeService = employeeService;
     }
 
-    @RolesAllowed("USER")
+    @RolesAllowed({"USER","ADMIN"})
     @UnitOfWork
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -30,6 +30,7 @@ public class EmployeeResource {
         return employeeService.findAll();
     }
 
+    @RolesAllowed({"USER,ADMIN"})
     @UnitOfWork
     @Path("/{id}")
     @GET
@@ -47,6 +48,7 @@ public class EmployeeResource {
         return employeeService.save(employee);
     }
 
+    @RolesAllowed("ADMIN")
     @UnitOfWork
     @Path("/{id}")
     @PUT
@@ -56,6 +58,7 @@ public class EmployeeResource {
         employee.setId(id);
         return employeeService.save(employee);
     }
+    @RolesAllowed("ADMIN")
     @UnitOfWork
     @Path("/{id}")
     @DELETE
