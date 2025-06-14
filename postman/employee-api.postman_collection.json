@@ -8,35 +8,6 @@
 	},
 	"item": [
 		{
-			"name": "Test",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"ABC\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/test/John",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"test",
-						"John"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "CreateEmployee",
 			"request": {
 				"method": "GET",
@@ -70,6 +41,14 @@
 		},
 		{
 			"name": "DeleteEmployeeById",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
 			"request": {
 				"method": "GET",
 				"header": []
