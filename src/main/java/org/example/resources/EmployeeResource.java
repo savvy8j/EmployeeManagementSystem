@@ -30,12 +30,12 @@ public class EmployeeResource {
         return employeeService.findAll();
     }
 
-    @RolesAllowed({"USER,ADMIN"})
+
     @UnitOfWork
     @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Employee getEmployee(@PathParam("id") Long id) {
+    public Employee getEmployee(@Auth User user,@PathParam("id") Long id) {
         return employeeService.findById(id);
     }
 
@@ -47,21 +47,21 @@ public class EmployeeResource {
         return employeeService.save(employee);
     }
 
-    @RolesAllowed("ADMIN")
+
     @UnitOfWork
     @Path("/{id}")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Employee updateEmployee(@PathParam("id") Long id, Employee employee) {
+    public Employee updateEmployee(@Auth Employee employee,@PathParam("id") Long id) {
         employee.setId(id);
         return employeeService.save(employee);
     }
-    @RolesAllowed("ADMIN")
+
     @UnitOfWork
     @Path("/{id}")
     @DELETE
-    public void deleteEmployee(@PathParam("id") Long id) {
+    public void deleteEmployee(@Auth Employee employee,@PathParam("id") Long id) {
         employeeService.delete(id);
     }
 
@@ -71,7 +71,7 @@ public class EmployeeResource {
     @GET
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Employee> searchEmployees(@Auth User user, @QueryParam("name") String name,
+    public List<Employee> searchEmployees(@Auth Employee user, @QueryParam("name") String name,
                                           @QueryParam("age") Integer age,
                                           @QueryParam("salary") Double salary) {
         return employeeService.search(name, age, salary);
