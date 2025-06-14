@@ -8,7 +8,7 @@ A simple Dropwizard-based RESTful Employee Management API with PostgreSQL and Hi
 ##  Overview
 
 This application provides a REST API for managing employees, including operations to:
-- Create, view, update, and delete employee records
+- Create, view, update, and delete employee records, along with search operation
 - Connect to a PostgreSQL database using Hibernate
 - Interact via Postman or cURL
 - Secure endpoints using:
