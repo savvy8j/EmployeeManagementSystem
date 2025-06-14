@@ -12,8 +12,11 @@ public class JwtAuthFilter<P extends Principal> extends AuthFilter<String, P> {
 
     @Override
     public void filter(final ContainerRequestContext containerRequestContext) throws IOException {
+        //expected format :- Authorization: Bearer <JWT_TOKEN>
         String headerString = containerRequestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 
+
+        //Rejected Request with 401:Unauthorized
         if (headerString == null || !headerString.startsWith("Bearer ")) {
             containerRequestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
             return;

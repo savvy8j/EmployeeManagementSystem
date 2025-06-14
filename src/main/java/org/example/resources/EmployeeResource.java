@@ -39,12 +39,11 @@ public class EmployeeResource {
         return employeeService.findById(id);
     }
 
-    @RolesAllowed("ADMIN")
     @UnitOfWork
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Employee createEmployee(Employee employee) {
+    public Employee createEmployee(@Auth Employee employee) {
         return employeeService.save(employee);
     }
 
@@ -67,6 +66,16 @@ public class EmployeeResource {
     }
 
 
+
+    @UnitOfWork
+    @GET
+    @Path("/search")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Employee> searchEmployees(@Auth User user, @QueryParam("name") String name,
+                                          @QueryParam("age") Integer age,
+                                          @QueryParam("salary") Double salary) {
+        return employeeService.search(name, age, salary);
+    }
 
 
 

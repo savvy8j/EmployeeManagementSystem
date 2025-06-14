@@ -27,4 +27,8 @@ public class EmployeeService {
     public void delete(Long id) {
         employeeDAO.delete(id);
     }
+
+    public List<Employee> search(String name, Integer age, Double salary) {
+        return employeeDAO.search(name, age, salary);
+    }
 }

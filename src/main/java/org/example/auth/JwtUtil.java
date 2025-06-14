@@ -7,6 +7,8 @@ import com.auth0.jwt.interfaces.JWTVerifier;
 
 import java.util.Date;
 //token generation
+
+//responsibilities are :-generate JWT,validate JWT,Extract username from JWT
 public class JwtUtil {
 
     private static final String SECRET = "SECRET";
