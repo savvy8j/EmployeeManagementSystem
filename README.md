@@ -1,6 +1,6 @@
 #  EmployeeManagementSystem
 
-A simple Dropwizard-based RESTful Employee Management API with PostgreSQL and Hibernate integration.
+A simple Dropwizard-based RESTful Employee Management API with PostgreSQL and Hibernate integration and secure access using authentication mechanisms.
 
 
 ---
@@ -11,6 +11,9 @@ This application provides a REST API for managing employees, including operation
 - Create, view, update, and delete employee records
 - Connect to a PostgreSQL database using Hibernate
 - Interact via Postman or cURL
+- Secure endpoints using:
+Basic Authentication: Ideal for simple user-role based access 
+JWT  Authentication: Stateless, token-based security for scalable API usage
 
 
 ## Technologies Used
