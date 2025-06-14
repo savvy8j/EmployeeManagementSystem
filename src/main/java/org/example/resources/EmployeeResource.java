@@ -22,7 +22,7 @@ public class EmployeeResource {
         this.employeeService = employeeService;
     }
 
-    @RolesAllowed({"USER","ADMIN"})
+
     @UnitOfWork
     @GET
     @Produces(MediaType.APPLICATION_JSON)
