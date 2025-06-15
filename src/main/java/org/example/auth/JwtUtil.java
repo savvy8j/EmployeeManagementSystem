@@ -22,7 +22,6 @@ public class JwtUtil {
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis()*60*60*1000))
                 .sign(algorithm);
-
     }
     public static DecodedJWT validateJWTToken(String token) {
         JWTVerifier jwtVerifier= JWT.require(algorithm)

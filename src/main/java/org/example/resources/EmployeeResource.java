@@ -2,6 +2,8 @@ package org.example.resources;
 
 import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -14,6 +16,7 @@ import java.util.List;
 
 @Slf4j
 @Path("/api/employees")
+@Tag(name ="EmployeeResource")
 public class EmployeeResource {
     private final EmployeeService employeeService;
 
@@ -26,7 +29,7 @@ public class EmployeeResource {
     @UnitOfWork
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Employee> getAllEmployees(@Auth User user) {
+    public List<Employee> getAllEmployees(@Auth @Parameter(hidden=true) User user) {
         return employeeService.findAll();
     }
 

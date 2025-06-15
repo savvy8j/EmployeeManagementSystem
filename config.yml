@@ -18,3 +18,12 @@ database:
     hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate.hbm2ddl.auto: create
     hibernate.show_sql: true
+
+
+swagger:
+  resourcePackage: org.example.resources
+  title: My API
+  version: 1.0
+  schemes:
+    - http
+  uriPrefix: /

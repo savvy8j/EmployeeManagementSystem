@@ -8,6 +8,8 @@ import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.example.auth.*;
 import org.example.core.EmployeeService;
 import org.example.core.TestService;
@@ -41,6 +43,14 @@ public class EmployeeManagementApplication extends Application<EmployeeManagemen
     @Override
     public void initialize(final Bootstrap<EmployeeManagementConfiguration> bootstrap) {
         bootstrap.addBundle(hibernate);
+        bootstrap.addBundle(new SwaggerBundle<EmployeeManagementConfiguration>() {
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(EmployeeManagementConfiguration configuration) {
+                return configuration.getSwagger();
+            }
+        });
+
+
     }
 
     @Override
@@ -51,7 +61,7 @@ public class EmployeeManagementApplication extends Application<EmployeeManagemen
 
         environment.jersey().register(new EmployeeResource(new EmployeeService(new EmployeeDAO(hibernate.getSessionFactory()))));
 //
-         //**** register this resource for basic auth****
+        //**** register this resource for basic auth****
 //        environment.jersey().register(new AuthDynamicFeature(
 //                new BasicCredentialAuthFilter.Builder<User>()
 //                        .setAuthenticator(new BasicAuthenticator())

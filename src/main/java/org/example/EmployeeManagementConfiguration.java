@@ -1,7 +1,9 @@
 package org.example;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.core.Configuration;
 import io.dropwizard.db.DataSourceFactory;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -15,6 +17,10 @@ public class EmployeeManagementConfiguration extends Configuration {
     @NotNull
     private DataSourceFactory database = new DataSourceFactory();
 
+    @Valid
+    @NotNull
+    @JsonProperty("swagger")
+    private SwaggerBundleConfiguration swagger = new SwaggerBundleConfiguration();
 
 
 }
