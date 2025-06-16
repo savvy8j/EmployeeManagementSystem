@@ -2,6 +2,7 @@ package org.example.core;
 
 import org.example.db.Employee;
 import org.example.db.EmployeeDAO;
+import org.example.exception.EmployeeNotFoundException;
 
 import java.util.List;
 
@@ -17,7 +18,8 @@ public class EmployeeService {
     }
 
     public Employee findById(Long id) {
-        return employeeDAO.findById(id);
+        return employeeDAO.findById(id)
+                .orElseThrow(() ->new EmployeeNotFoundException("Employee with id "+id+" not found"));
     }
 
     public Employee save(Employee employee) {

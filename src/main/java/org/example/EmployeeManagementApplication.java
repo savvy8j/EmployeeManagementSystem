@@ -15,6 +15,7 @@ import org.example.core.EmployeeService;
 import org.example.core.TestService;
 import org.example.db.Employee;
 import org.example.db.EmployeeDAO;
+import org.example.exception.EmployeeNotFoundExceptionMapper;
 import org.example.resources.AuthenticationResource;
 import org.example.resources.EmployeeResource;
 import org.example.resources.TestResource;
@@ -80,6 +81,7 @@ public class EmployeeManagementApplication extends Application<EmployeeManagemen
 
         environment.jersey().register(new AuthenticationResource());
 
+        environment.jersey().register(new EmployeeNotFoundExceptionMapper());
 //
 //        System.out.println(configuration.getGreetingMessage());
         // TODO: implement application

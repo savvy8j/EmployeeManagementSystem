@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.example.auth.User;
 import org.example.core.EmployeeService;
@@ -46,8 +47,10 @@ public class EmployeeResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Employee createEmployee(@Auth  @Parameter(hidden=true) Employee employee) {
-        return employeeService.save(employee);
+    public Response createEmployee(@Auth  @Parameter(hidden=true) Employee employee) {
+        return Response.status(Response.Status.CREATED).
+                entity(employeeService.save(employee)).
+                build();
     }
 
 

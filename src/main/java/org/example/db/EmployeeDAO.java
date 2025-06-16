@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public class EmployeeDAO extends AbstractDAO<Employee> {
     public EmployeeDAO(SessionFactory sessionFactory) {
@@ -15,8 +16,8 @@ public class EmployeeDAO extends AbstractDAO<Employee> {
         return query("from Employee").list();
     }
 
-    public Employee findById(Long id) {
-        return currentSession().get(Employee.class, id);
+    public Optional<Employee> findById(Long id) {
+        return Optional.ofNullable(get(id));
     }
 
     public Employee saveOrUpdate(Employee employee) {
@@ -24,9 +25,9 @@ public class EmployeeDAO extends AbstractDAO<Employee> {
     }
 
     public void delete(Long id) {
-        Employee employee = findById(id);
-        if (employee != null) {
-            currentSession().remove(employee);
+        Optional<Employee> optionalEmployee = findById(id);
+        if (optionalEmployee.isPresent()) {
+            currentSession().remove(optionalEmployee);
         }
     }
 
