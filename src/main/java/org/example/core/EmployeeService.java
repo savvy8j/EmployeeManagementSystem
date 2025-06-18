@@ -3,6 +3,7 @@ package org.example.core;
 import org.example.db.Employee;
 import org.example.db.EmployeeDAO;
 import org.example.exception.EmployeeNotFoundException;
+import org.example.exception.IllegalArgumentException;
 
 import java.util.List;
 
@@ -18,11 +19,15 @@ public class EmployeeService {
     }
 
     public Employee findById(Long id) {
+        if(id == null || id<=0){
+            throw new IllegalArgumentException("Invalid ID "+id);
+        }
         return employeeDAO.findById(id)
                 .orElseThrow(() ->new EmployeeNotFoundException("Employee with id "+id+" not found"));
     }
 
     public Employee save(Employee employee) {
+        System.out.println(employee.getName().toUpperCase());
         return employeeDAO.saveOrUpdate(employee);
     }
 
