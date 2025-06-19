@@ -15,7 +15,8 @@ public class EmployeeService {
     }
 
     public List<Employee> findAll() {
-        return employeeDAO.findAll();
+        List<Employee> all = employeeDAO.findAll();
+         return employeeDAO.findAll();
     }
 
     public Employee findById(Long id) {
@@ -32,6 +33,7 @@ public class EmployeeService {
     }
 
     public void delete(Long id) {
+        findById(id);
         employeeDAO.delete(id);
     }
 

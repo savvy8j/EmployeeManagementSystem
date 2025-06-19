@@ -12,4 +12,8 @@ import lombok.NoArgsConstructor;
 public class LoginDTO {
     String username;
     String password;
+
+//    public static void main(String[] args) {
+//        MockitoExtension me = new MockitoExtension();
+//    }
 }
