@@ -26,9 +26,7 @@ public class EmployeeDAO extends AbstractDAO<Employee> {
 
     public void delete(Long id) {
         Optional<Employee> optionalEmployee = findById(id);
-        if (optionalEmployee.isPresent()) {
-            currentSession().remove(optionalEmployee);
-        }
+        optionalEmployee.ifPresent(employee -> currentSession().remove(employee));
     }
 
     public List<Employee> search(String name,Integer age,Double salary) {

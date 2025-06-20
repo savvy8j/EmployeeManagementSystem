@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -55,7 +56,12 @@ class EmployeeServiceTest {
     public void createEmployee() {
         when(employeeDAO.saveOrUpdate(any())).thenReturn(Employee.builder().id(1L).name("abc").build());
         Employee emp = employeeService.save(Employee.builder().id(1L).name("abc").build());
-        Assertions.assertEquals("abc", emp.getName());
+
+        ArgumentCaptor<Employee> employeeCaptor = ArgumentCaptor.forClass(Employee.class);
+        verify(employeeDAO).saveOrUpdate(employeeCaptor.capture());
+        Employee employee = employeeCaptor.getValue();
+        assertEquals("ABC", employee.getName());
+
     }
 
 

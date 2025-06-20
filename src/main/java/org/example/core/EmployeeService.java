@@ -29,6 +29,8 @@ public class EmployeeService {
 
     public Employee save(Employee employee) {
         System.out.println(employee.getName().toUpperCase());
+        employee.setName(employee.getName().toUpperCase());
+
         return employeeDAO.saveOrUpdate(employee);
     }
 
