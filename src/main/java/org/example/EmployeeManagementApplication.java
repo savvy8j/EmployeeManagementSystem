@@ -2,6 +2,7 @@ package org.example;
 
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
+import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.core.Application;
 import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
@@ -9,7 +10,9 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import jakarta.ws.rs.client.Client;
 import org.example.auth.*;
+import org.example.client.PostClient;
 import org.example.core.EmployeeService;
 import org.example.core.TestService;
 import org.example.db.Employee;
@@ -19,6 +22,7 @@ import org.example.exception.GlobalExceptionMapper;
 import org.example.exception.IllegalArgumentExceptionMapper;
 import org.example.resources.AuthenticationResource;
 import org.example.resources.EmployeeResource;
+import org.example.resources.PostResource;
 import org.example.resources.TestResource;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
@@ -86,6 +90,11 @@ public class EmployeeManagementApplication extends Application<EmployeeManagemen
 
         environment.jersey().register(new IllegalArgumentExceptionMapper());
         environment.jersey().register(new GlobalExceptionMapper());
+
+        final Client client = new JerseyClientBuilder(environment).using(configuration.getJerseyClient())
+                .build(getName());
+
+        environment.jersey().register(new PostResource(new PostClient(client,configuration.getPostsUrl())));
 //
 //        System.out.println(configuration.getGreetingMessage());
         // TODO: implement application

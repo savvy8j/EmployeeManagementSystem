@@ -47,7 +47,7 @@ class EmployeeServiceTest {
     @Test
     public void getEmployeeById() {
         when(employeeDAO.findById(eq(1L))).thenReturn(Optional.of(Employee.builder().id(1L).name("abc").build()));
-        Employee employee = employeeService.findById(2L);
+        Employee employee = employeeService.findById(1L);
         Assertions.assertEquals("abc", employee.getName());
         verify(employeeDAO).findById(eq(1L));
     }
@@ -55,8 +55,7 @@ class EmployeeServiceTest {
     @Test
     public void createEmployee() {
         when(employeeDAO.saveOrUpdate(any())).thenReturn(Employee.builder().id(1L).name("abc").build());
-        Employee emp = employeeService.save(Employee.builder().id(1L).name("abc").build());
-
+        employeeService.save(Employee.builder().id(1L).name("abc").build());
         ArgumentCaptor<Employee> employeeCaptor = ArgumentCaptor.forClass(Employee.class);
         verify(employeeDAO).saveOrUpdate(employeeCaptor.capture());
         Employee employee = employeeCaptor.getValue();

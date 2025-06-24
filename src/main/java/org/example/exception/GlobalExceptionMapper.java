@@ -9,7 +9,7 @@ public class GlobalExceptionMapper implements ExceptionMapper<Exception> {
     @Override
     public Response toResponse(Exception e) {
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                .entity(new ErrorResponse("Something went wrong"))
+                .entity(new ErrorResponse(e.getMessage()))
                 .build();
     }
 }

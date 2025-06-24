@@ -1,6 +1,7 @@
 package org.example;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.dropwizard.client.JerseyClientConfiguration;
 import io.dropwizard.core.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
@@ -21,6 +22,14 @@ public class EmployeeManagementConfiguration extends Configuration {
     @NotNull
     @JsonProperty("swagger")
     private SwaggerBundleConfiguration swagger = new SwaggerBundleConfiguration();
+
+    @Valid
+    @NotNull
+    private JerseyClientConfiguration jerseyClient = new JerseyClientConfiguration();
+
+    @JsonProperty("posts.url")
+    private String postsUrl;
+
 
 
 }
